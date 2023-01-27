@@ -10,7 +10,7 @@ public class Horse {
     public String name{get;set;}
     public String description{get;set;}
     public DateTime date_of_birth{get;set;}
-    public Sex sex{get;set;}
+    public String sex{get;set;}
     public long owner_id{get;set;}
 
     public long father;

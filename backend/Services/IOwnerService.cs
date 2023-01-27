@@ -6,11 +6,11 @@ namespace backend.Service {
 
     public interface IOwnerService{
 
-        OwnerDTO update(OwnerDTO owner);
-        OwnerDTO delete(OwnerDTO owner);
-        OwnerDTO create();
+        OwnerDetailDTO update(OwnerDTO owner);
+        OwnerDetailDTO delete(OwnerDTO owner);
+        OwnerDetailDTO create();
         List<OwnerDTO> getAll();
-        OwnerDTO getById(OwnerDTO owner);
+        OwnerDetailDTO getById(long id);
 
         List<OwnerDTO> search(OwnerDTO searchParameters);
 

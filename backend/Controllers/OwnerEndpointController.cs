@@ -31,6 +31,15 @@ namespace backend.Controllers
             return _service.getAll();
         }
 
+
+
+        [HttpGet("{id}")]
+        public OwnerDetailDTO getOwnerByID(long id){
+            return _service.getById(id);
+        }
+
+
+
     }
 
 

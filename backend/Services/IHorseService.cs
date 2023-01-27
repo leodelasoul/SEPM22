@@ -10,7 +10,7 @@ namespace backend.Service {
         HorseDetailDTO delete(HorseDetailDTO horse);
         HorseDetailDTO create();
         List<HorseDTO> getAll();
-        HorseDetailDTO getById(HorseDetailDTO horse);
+        HorseDetailDTO getById(long id);
 
 
     }

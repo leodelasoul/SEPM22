@@ -31,6 +31,12 @@ namespace backend.Controllers
             return _service.getAll();
         }
 
+        [HttpGet("{id}")]
+        public HorseDetailDTO getHorseByID(long id){
+            return _service.getById(id);
+        }
+
+
     }
 
 

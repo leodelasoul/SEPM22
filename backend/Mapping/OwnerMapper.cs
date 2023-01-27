@@ -21,6 +21,20 @@ namespace backend.Mapping
                 email = owner.email
             };
         }
+        public static OwnerDetailDTO ToOwnerDetailDTOMap(Owner owner){
+
+             if(owner == null){
+                return null;
+            }
+            
+            return new OwnerDetailDTO(){
+                id = owner.id,
+                firstName = owner.first_name,
+                lastName = owner.last_name,
+                email = owner.email
+            };
+
+        }
 
     
 

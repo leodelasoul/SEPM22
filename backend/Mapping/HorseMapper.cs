@@ -1,6 +1,6 @@
 using backend.Entity;
 using backend.Models;
-
+using backend.Enums;
 namespace backend.Mapping
 {
 
@@ -16,6 +16,21 @@ namespace backend.Mapping
             return owner;
         }
 
+        private static HorseDTO getHorse(long id,  List<HorseDTO> horses){
+            HorseDTO horseDTO = null;
+            foreach(HorseDTO h in horses){
+                if(id == h.id){
+                    horseDTO = h;
+                }
+            }
+            if(horseDTO == null){
+                return null;
+            }else {
+                return horseDTO;
+            }
+            
+        }
+
 
         /*
         * *params*
@@ -28,6 +43,7 @@ namespace backend.Mapping
             {
                 return null;
             }
+            Sex sex = (Sex) Enum.Parse(typeof(Sex), horse.sex); // needed as mssql cant handle enums
 
             return new HorseDTO()
             {
@@ -35,12 +51,35 @@ namespace backend.Mapping
                 name = horse.name,
                 description = horse.description,
                 dateOfBirth = horse.date_of_birth,
-                sex = horse.sex,
+                sex = sex,
                 owner = getOwner(horse, owners)
 
 
             };
         }
+
+        public static HorseDetailDTO ToHorseDetailDTOMap(Horse horse, Dictionary<long, OwnerDTO> owners,  List<HorseDTO> horses){
+            if (horse == null)
+            {
+                return null;
+            }
+            Sex sex = (Sex) Enum.Parse(typeof(Sex), horse.sex); // needed as mssql cant handle enums
+
+            return new HorseDetailDTO()
+            {
+                id = horse.id,
+                name = horse.name,
+                description = horse.description,
+                dateOfBirth = horse.date_of_birth,
+                sex = sex,
+                owner = getOwner(horse, owners),
+                father = getHorse(horse.father, horses),
+                mother = getHorse(horse.mother, horses)
+
+
+            };
+        }
+
     }
 
 }

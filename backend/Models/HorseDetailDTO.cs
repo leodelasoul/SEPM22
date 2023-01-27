@@ -18,8 +18,8 @@ public class HorseDetailDTO {
 
     public OwnerDTO owner{get;set;}
 
-    public Horse mother{get;set;}
-    public Horse father{get;set;}
+    public HorseDTO mother{get;set;}
+    public HorseDTO father{get;set;}
 
 
 
