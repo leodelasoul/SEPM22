@@ -37,6 +37,31 @@ namespace backend.Controllers
         }
 
 
+        [HttpPost]
+        public HorseDetailDTO createHorse(HorseDetailDTO toCreate){
+            return _service.create(toCreate);
+        }
+
+        [HttpDelete("{id}")]
+        public void deleteHorse(long id){
+             _service.delete(id);
+        }
+
+        [HttpPut("{id}")]
+        public HorseDetailDTO updateHorse(long id, HorseDetailDTO toUpdate){
+            return _service.update(id, toUpdate);
+
+        }
+
+        [HttpPost("search")]
+        public List<HorseSearchDTO> searchHorse([FromBody] string searchText){
+            return _service.search(searchText);
+        }
+
+
+
+
+
     }
 
 

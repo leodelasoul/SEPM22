@@ -24,7 +24,7 @@ public class Startup{
         services.AddTransient<IHorseService, HorseService>();
 
 
-        services.AddControllers();
+        services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true); // described by the bool value quite good
      
     }
       public void Configure(WebApplication app, IWebHostEnvironment env) {

@@ -39,6 +39,26 @@ namespace backend.Controllers
         }
 
 
+        [HttpPost]
+        public OwnerDetailDTO createOwner(OwnerDetailDTO toCreate){
+            return _service.create(toCreate);
+        }
+
+        [HttpDelete("{id}")]
+        public OwnerDetailDTO deleteOwner(OwnerDetailDTO toDelete){
+            return _service.delete(toDelete);
+        }
+
+        [HttpPut("{id}")]
+        public OwnerDetailDTO updateOwner(long id, OwnerDetailDTO toUpdate){
+            return _service.update(id,toUpdate);
+        }
+
+
+        [HttpPost("search")]
+        public List<OwnerDTO> searchOwner([FromBody]string searchParams){
+            return _service.search(searchParams);
+        } 
 
     }
 

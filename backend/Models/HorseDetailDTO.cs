@@ -1,5 +1,6 @@
 using backend.Enums;
 using backend.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace backend.Models {
 
@@ -18,11 +19,10 @@ public class HorseDetailDTO {
 
     public OwnerDTO owner{get;set;}
 
-    public HorseDTO mother{get;set;}
-    public HorseDTO father{get;set;}
+    public HorseDTO? mother{get;set;}
+    public HorseDTO? father{get;set;}
 
-
-
-}
+      
+    }
 
 }

@@ -10,13 +10,13 @@ namespace backend.Mapping
 
         private static OwnerDTO getOwner(Horse horse, Dictionary<long, OwnerDTO> owners)
         {
-            OwnerDTO owner = null;
+            OwnerDTO owner = new OwnerDTO();
             var ownerId = horse.owner_id;
             owner = owners[ownerId];
             return owner;
         }
 
-        private static HorseDTO getHorse(long id,  List<HorseDTO> horses){
+        private static HorseDTO getHorse(long? id,  List<HorseDTO> horses){
             HorseDTO horseDTO = null;
             foreach(HorseDTO h in horses){
                 if(id == h.id){
@@ -79,6 +79,40 @@ namespace backend.Mapping
 
             };
         }
+
+        public static Horse HorseDetailDTOToHorseMap(HorseDetailDTO horse){
+            return new Horse{
+                id = horse.id,
+                name = horse.name,
+                description = horse.description,
+                date_of_birth = horse.dateOfBirth,
+                sex = horse.sex.ToString(),
+                owner_id = horse.owner.id,
+                mother = (horse.mother != null) ? horse.mother.id : null,
+                father = (horse.father != null) ? horse.father.id : null
+            };
+        }
+
+          public static HorseSearchDTO ToHorseSearchDTOMap(Horse horse, Dictionary<long, OwnerDTO> owners)
+        {
+            if (horse == null)
+            {
+                return null;
+            }
+            Sex sex = (Sex) Enum.Parse(typeof(Sex), horse.sex); // needed as mssql cant handle enums
+
+            return new HorseSearchDTO()
+            {
+                name = horse.name,
+                description = horse.description,
+                dateOfBirth = horse.date_of_birth,
+                sex = sex,
+                owner = getOwner(horse, owners)
+
+            };
+        }
+
+        
 
     }
 

@@ -2,7 +2,7 @@ using System;
 using backend.Enums;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-
+using System.Linq;
 namespace backend.Entity
 {
 public class Horse {
@@ -13,9 +13,9 @@ public class Horse {
     public String sex{get;set;}
     public long owner_id{get;set;}
 
-    public long father;
+    public long? father{get;set;}
 
-    public long mother;
+    public long? mother{get;set;}
 
 
 

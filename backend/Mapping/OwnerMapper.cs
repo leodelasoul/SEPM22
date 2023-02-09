@@ -33,11 +33,24 @@ namespace backend.Mapping
                 lastName = owner.last_name,
                 email = owner.email
             };
+        
 
         }
 
+        public static Owner OwnerDetailDTOToOwnerMap(OwnerDetailDTO owner){
+            if(owner == null){
+                return null;
+            }
+
+            return new Owner()
+            {
+                id = owner.id,
+                first_name = owner.firstName,
+                last_name = owner.lastName,
+                email = owner.email
+            };
+        }
+
+        }
     
-
     }
-
-}
