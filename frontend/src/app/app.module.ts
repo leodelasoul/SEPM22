@@ -13,6 +13,8 @@ import {AutocompleteComponent} from './component/autocomplete/autocomplete.compo
 import {HeaderComponent} from './component/header/header.component';
 import {HorseCreateEditComponent} from './component/horse/horse-create-edit/horse-create-edit.component';
 import {HorseComponent} from './component/horse/horse.component';
+import {OwnerComponent } from './component/owner/owner.component';
+import {OwnerCreateEditComponent } from './component/owner/owner-create-edit/owner-create-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import {HorseComponent} from './component/horse/horse.component';
     HorseComponent,
     HorseCreateEditComponent,
     AutocompleteComponent,
+    OwnerComponent,
+    OwnerCreateEditComponent
   ],
   imports: [
     BrowserModule,
