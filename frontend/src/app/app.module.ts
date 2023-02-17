@@ -5,6 +5,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog'; 
+
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
@@ -15,7 +17,7 @@ import {HorseCreateEditComponent} from './component/horse/horse-create-edit/hors
 import {HorseComponent} from './component/horse/horse.component';
 import {OwnerComponent } from './component/owner/owner.component';
 import {OwnerCreateEditComponent } from './component/owner/owner-create-edit/owner-create-edit.component';
-
+import {ConfirmationDeleteDialogComponent} from './component/confirm-delete-dialog/confirmation-delete-dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import {OwnerCreateEditComponent } from './component/owner/owner-create-edit/own
     HorseCreateEditComponent,
     AutocompleteComponent,
     OwnerComponent,
-    OwnerCreateEditComponent
+    OwnerCreateEditComponent,
+    ConfirmationDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +38,11 @@ import {OwnerCreateEditComponent } from './component/owner/owner-create-edit/own
     ToastrModule.forRoot(),
     // Needed for Toastr
     BrowserAnimationsModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

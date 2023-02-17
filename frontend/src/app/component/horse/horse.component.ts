@@ -3,6 +3,8 @@ import {ToastrService} from 'ngx-toastr';
 import {HorseService} from 'src/app/service/horse.service';
 import {Horse} from '../../dto/horse';
 import {Owner} from '../../dto/owner';
+import { Sex } from 'src/app/dto/sex';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-horse',
@@ -12,11 +14,17 @@ import {Owner} from '../../dto/owner';
 export class HorseComponent implements OnInit {
   search = false;
   horses: Horse[] = [];
+  horse: Horse = {
+    name: '',
+    dateOfBirth: new Date(),
+    sex: Sex.female
+  };
   bannerError: string | null = null;
 
   constructor(
     private service: HorseService,
     private notification: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -40,10 +48,28 @@ export class HorseComponent implements OnInit {
       });
   }
 
+  delete(id: number, horse: Horse) {
+    this.service.delete(id, horse)
+      .subscribe({
+        next: data => {
+          console.log(data);
+          this.notification.success(`Horse ${this.horse.name} successfully deleted.`);
+          this.router.navigate(['/horses']);
+          this.reloadHorses();
+          
+        },
+        error: error => {
+          console.error('Error deleting Horse', error);
+          this.bannerError = 'Could not delete Horse: ' + error.message;
+        }
+      });
+  }
+
+
   ownerName(owner: Owner | null): string {
     return owner
       ? `${owner.firstName} ${owner.lastName}`
-      : '';
+      : 'None';
   }
 
   dateOfBirthAsLocaleDate(horse: Horse): string {

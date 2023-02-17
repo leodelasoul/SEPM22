@@ -3,7 +3,9 @@ import { ToastrService } from 'ngx-toastr';
 import { OwnerService } from 'src/app/service/owner.service';
 import { Horse } from 'src/app/dto/horse';
 import { Owner } from 'src/app/dto/owner';
-
+import { Route, Router } from '@angular/router';
+import { ConfirmationDeleteDialogComponent } from '../confirm-delete-dialog/confirmation-delete-dialog';
+import { MatDialog, MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-owner',
   templateUrl: './owner.component.html',
@@ -12,18 +14,44 @@ import { Owner } from 'src/app/dto/owner';
 export class OwnerComponent implements OnInit {
   search = false;
   owners: Owner[] = [];
+  owner: Owner = {
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
+
   bannerError: string | null = null;
-  
   constructor(
     private service: OwnerService,
     private notification: ToastrService,
+    private router: Router,
+    private dialog: MatDialog,
+  
   ) { }
-
 
   ngOnInit(): void {
     this.reloadOwners();
   }
-  
+
+
+  onDelete(id: number, owner: Owner) {
+    const dialogRef = this.dialog.open(ConfirmationDeleteDialogComponent,{});
+    
+    // this.service.delete(id, owner)
+    //   .subscribe({
+    //     next: data => {
+    //       this.owner = data
+    //       this.notification.success(`Owner ${this.owner.firstName} ${this.owner.lastName} successfully deleted.`);
+    //       this.router.navigate(['/owners']);
+    //       this.reloadOwners();
+          
+    //     },
+    //     error: error => {
+    //       console.error('Error deleting owner', error);
+    //       this.bannerError = 'Could not delete owner: ' + error.message;
+    //     }
+    //   });
+  }
 
   reloadOwners() {
     this.service.getAll()
@@ -40,9 +68,9 @@ export class OwnerComponent implements OnInit {
           this.notification.error(errorMessage, 'Could Not Fetch owners');
         }
       });
-  
+
   }
-  
+
 
 
 }

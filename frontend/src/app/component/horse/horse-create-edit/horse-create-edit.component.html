@@ -97,6 +97,52 @@
     <!-- End sex and owner row -->
   </div>
 
+  <div class="row">
+    <!-- Start sex and owner row -->
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label for="horseMother" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Mother
+        </label>
+        <div class="col-md-10 col-lg-8"
+             >
+             <app-autocomplete
+             id="horseMother"
+             name="horseMother"
+             class="col-md-10 col-lg-8"
+             textInputClass="form-control"
+             valueNeedsToMatchSuggestion="true"
+             [(ngModel)]="horse.mother"
+            
+             ></app-autocomplete>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label for="horseFather" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Father
+        </label>
+        <app-autocomplete
+          id="horseFather"
+          name="horseFather"
+          class="col-md-10 col-lg-8"
+          textInputClass="form-control"
+          valueNeedsToMatchSuggestion="true"
+          [(ngModel)]="horse.father"
+         
+          ></app-autocomplete>
+          <!-- [formatModel]="formatOwnerName"
+          [suggestions]="ownerSuggestions" -->
+      </div>
+    </div>
+    <!-- End sex and owner row -->
+  </div>
+
+
+
+
 
   <div class="row">
     <!-- No row and col-* here. We want this to always span the whole width. -->
@@ -113,6 +159,7 @@
       </textarea>
     </div>
   </div>
+
 
   <div class="mt-4 d-flex flex-row">
     <button type="button"

@@ -39,4 +39,19 @@ export class HorseService {
     );
   }
 
+  
+  delete(id: number, horse: Horse): Observable<Horse> { 
+    var options = { body: horse}
+    return this.http.delete<Horse>(baseUri+'/'+id, options);
+  }
+
+
+  public searchByName(name: string, limitTo: number): Observable<Horse[]> {
+    const params = new HttpParams()
+      .set('name', name)
+      .set('maxAmount', limitTo);
+    return this.http.get<Horse[]>(baseUri, { params });
+  }
+
+
 }

@@ -44,6 +44,8 @@ export class HorseCreateEditComponent implements OnInit {
     switch (this.mode) {
       case HorseCreateEditMode.create:
         return 'Create New Horse';
+      case HorseCreateEditMode.edit:
+        return 'Edit New Horse';
       default:
         return '?';
     }
@@ -53,13 +55,15 @@ export class HorseCreateEditComponent implements OnInit {
     switch (this.mode) {
       case HorseCreateEditMode.create:
         return 'Create';
+      case HorseCreateEditMode.edit:
+        return 'Edit';
       default:
         return '?';
     }
   }
 
   get modeIsCreate(): boolean {
-    return this.mode === HorseCreateEditMode.create;
+    return true ? this.mode === HorseCreateEditMode.create : false;
   }
 
 
@@ -67,6 +71,8 @@ export class HorseCreateEditComponent implements OnInit {
     switch (this.mode) {
       case HorseCreateEditMode.create:
         return 'created';
+      case HorseCreateEditMode.edit:
+        return 'updated'
       default:
         return '?';
     }
@@ -75,6 +81,10 @@ export class HorseCreateEditComponent implements OnInit {
   ownerSuggestions = (input: string) => (input === '')
     ? of([])
     : this.ownerService.searchByName(input, 5);
+
+  private horseSuggestions(input: string){
+    return this.service.searchByName(input,5);
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {

@@ -22,6 +22,19 @@ export class OwnerService {
     return this.http.get<Owner[]>(baseUri, { params });
   }
 
+ 
+  create(owner: Owner): Observable<Owner> {
+    return this.http.post<Owner>(
+      baseUri,
+      owner
+    );
+  }
+
+  delete(id: number, owner: Owner): Observable<Owner> { 
+    var options = { body: owner}
+    return this.http.delete<Owner>(baseUri+'/'+id, options);
+  }
+
 
   getAll(): Observable<Owner[]> {
     return this.http.get<Owner[]>(baseUri);
