@@ -113,7 +113,9 @@
              textInputClass="form-control"
              valueNeedsToMatchSuggestion="true"
              [(ngModel)]="horse.mother"
-            
+             [suggestions]="motherSuggestions"
+             [formatModel]="formatHorseName"
+
              ></app-autocomplete>
         </div>
       </div>
@@ -131,7 +133,9 @@
           textInputClass="form-control"
           valueNeedsToMatchSuggestion="true"
           [(ngModel)]="horse.father"
-         
+          [suggestions]="fatherSuggestions"
+          [formatModel]="formatHorseName"
+
           ></app-autocomplete>
           <!-- [formatModel]="formatOwnerName"
           [suggestions]="ownerSuggestions" -->

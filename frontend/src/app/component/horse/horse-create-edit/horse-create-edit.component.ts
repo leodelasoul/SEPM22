@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm, NgModel} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Observable, of} from 'rxjs';
-import {Horse} from 'src/app/dto/horse';
-import {Owner} from 'src/app/dto/owner';
-import {Sex} from 'src/app/dto/sex';
-import {HorseService} from 'src/app/service/horse.service';
-import {OwnerService} from 'src/app/service/owner.service';
+import { Component, OnInit } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, of } from 'rxjs';
+import { Horse } from 'src/app/dto/horse';
+import { Owner } from 'src/app/dto/owner';
+import { Sex } from 'src/app/dto/sex';
+import { HorseService } from 'src/app/service/horse.service';
+import { OwnerService } from 'src/app/service/owner.service';
 
 
 export enum HorseCreateEditMode {
@@ -82,9 +82,17 @@ export class HorseCreateEditComponent implements OnInit {
     ? of([])
     : this.ownerService.searchByName(input, 5);
 
-  private horseSuggestions(input: string){
-    return this.service.searchByName(input,5);
-  }
+
+  fatherSuggestions = (input: string, sex: Sex) => (input === '')
+    ? of([])
+    : this.service.searchByName(input, sex, 5);
+
+
+
+  motherSuggestions = (input: string, sex: Sex) => (input === '')
+    ? of([])
+    : this.service.searchByName(input, sex, 5);
+
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -106,7 +114,11 @@ export class HorseCreateEditComponent implements OnInit {
       ? ''
       : `${owner.firstName} ${owner.lastName}`;
   }
-
+  public formatHorseName(horse: Horse | null | undefined): string {
+    return (horse == null)
+      ? ''
+      : `${horse.name}`;
+  }
 
   public onSubmit(form: NgForm): void {
     console.log('is form valid?', form.valid, this.horse);

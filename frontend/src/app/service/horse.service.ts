@@ -46,9 +46,10 @@ export class HorseService {
   }
 
 
-  public searchByName(name: string, limitTo: number): Observable<Horse[]> {
+  public searchByName(name: string, sex?: Sex,limitTo: number): Observable<Horse[]> {
     const params = new HttpParams()
       .set('name', name)
+      .set('sex', sex)
       .set('maxAmount', limitTo);
     return this.http.get<Horse[]>(baseUri, { params });
   }

@@ -43,6 +43,7 @@ import {ConfirmationDeleteDialogComponent} from './component/confirm-delete-dial
   providers: [
     
   ],
+  entryComponents:[ConfirmationDeleteDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

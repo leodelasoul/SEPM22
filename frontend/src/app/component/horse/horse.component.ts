@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {HorseService} from 'src/app/service/horse.service';
-import {Horse} from '../../dto/horse';
-import {Owner} from '../../dto/owner';
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { HorseService } from 'src/app/service/horse.service';
+import { Horse } from '../../dto/horse';
+import { Owner } from '../../dto/owner';
 import { Sex } from 'src/app/dto/sex';
 import { Router } from '@angular/router';
+import { ConfirmationDeleteDialogComponent } from '../confirm-delete-dialog/confirmation-delete-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-horse',
@@ -24,7 +27,9 @@ export class HorseComponent implements OnInit {
   constructor(
     private service: HorseService,
     private notification: ToastrService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+
   ) { }
 
   ngOnInit(): void {
@@ -48,21 +53,31 @@ export class HorseComponent implements OnInit {
       });
   }
 
-  delete(id: number, horse: Horse) {
-    this.service.delete(id, horse)
-      .subscribe({
-        next: data => {
-          console.log(data);
-          this.notification.success(`Horse ${this.horse.name} successfully deleted.`);
-          this.router.navigate(['/horses']);
-          this.reloadHorses();
-          
-        },
-        error: error => {
-          console.error('Error deleting Horse', error);
-          this.bannerError = 'Could not delete Horse: ' + error.message;
-        }
-      });
+  onDelete(id: number, horse: Horse) {
+
+    const dialogRef = this.dialog.open(ConfirmationDeleteDialogComponent, {
+      data: {
+        confirmAction: 'delete',
+        subject: horse
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {      
+      if (dialogRef.componentInstance.isConfirmed) {
+        this.service.delete(id, horse)
+          .subscribe({
+            next: data => {
+              this.notification.success(`Horse ${this.horse.name} successfully deleted.`);
+              this.router.navigate(['/horses']);
+              this.reloadHorses();
+
+            },
+            error: error => {
+              console.error('Error deleting Horse', error);
+              this.bannerError = 'Could not delete Horse: ' + error.message;
+            }
+          });
+      }
+    })
   }
 
 

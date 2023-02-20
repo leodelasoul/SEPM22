@@ -5,7 +5,8 @@ import { Horse } from 'src/app/dto/horse';
 import { Owner } from 'src/app/dto/owner';
 import { Route, Router } from '@angular/router';
 import { ConfirmationDeleteDialogComponent } from '../confirm-delete-dialog/confirmation-delete-dialog';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-owner',
   templateUrl: './owner.component.html',
@@ -33,24 +34,38 @@ export class OwnerComponent implements OnInit {
     this.reloadOwners();
   }
 
-
   onDelete(id: number, owner: Owner) {
-    const dialogRef = this.dialog.open(ConfirmationDeleteDialogComponent,{});
-    
-    // this.service.delete(id, owner)
-    //   .subscribe({
-    //     next: data => {
-    //       this.owner = data
-    //       this.notification.success(`Owner ${this.owner.firstName} ${this.owner.lastName} successfully deleted.`);
-    //       this.router.navigate(['/owners']);
-    //       this.reloadOwners();
-          
-    //     },
-    //     error: error => {
-    //       console.error('Error deleting owner', error);
-    //       this.bannerError = 'Could not delete owner: ' + error.message;
-    //     }
-    //   });
+
+      const dialogRef = this.dialog.open(ConfirmationDeleteDialogComponent,{
+        data: { confirmAction: 'delete',
+                subject: owner 
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(() => {
+        
+        if(dialogRef.componentInstance.isConfirmed){
+          this.service.delete(id, owner)
+            .subscribe({
+              next: data => {
+                this.owner = data
+                this.notification.success(`Owner ${this.owner.firstName} ${this.owner.lastName} successfully deleted.`);
+                this.router.navigate(['/owners']);
+                this.reloadOwners();
+                
+              },
+              error: error => {
+                console.error('Error deleting owner', error);
+                this.bannerError = 'Could not delete owner: ' + error.message;
+              }
+            });
+  
+        }
+      });
+      
+  
+
+      
   }
 
   reloadOwners() {
