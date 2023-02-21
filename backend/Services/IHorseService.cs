@@ -16,7 +16,7 @@ namespace backend.Service {
         HorseDetailDTO getById(long id);
 
 
-        List<HorseSearchDTO> search(string searchText);
+        List<HorseSearchDTO> search(HorseSearchDTO searchText);
 
 
         

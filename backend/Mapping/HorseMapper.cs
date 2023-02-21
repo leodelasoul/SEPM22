@@ -8,11 +8,16 @@ namespace backend.Mapping
     {
 
 
-        private static OwnerDTO getOwner(Horse horse, Dictionary<long, OwnerDTO> owners)
+        private static OwnerDTO? getOwner(Horse horse, Dictionary<long, OwnerDTO> owners)
         {
             OwnerDTO owner = new OwnerDTO();
             var ownerId = horse.owner_id;
-            owner = owners[ownerId];
+            try{
+                owner = owners[ownerId];
+            }catch(KeyNotFoundException e){
+                return null;
+            }
+
             return owner;
         }
 

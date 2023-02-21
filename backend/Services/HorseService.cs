@@ -109,7 +109,7 @@ namespace backend.Service
             return horseDetails;
         }
 
-        public List<HorseSearchDTO> search(string searchText)
+        public List<HorseSearchDTO> search(HorseSearchDTO horse)
         {
             List<HorseSearchDTO> foundHorses = new List<HorseSearchDTO>();
             
@@ -118,7 +118,7 @@ namespace backend.Service
                 var owners = context.Owner.ToDictionary(o => o.id, o => OwnerMapper.ToOwnerDTOMap(o));
                 try
                 {
-                    var doExist = context.Horse.Where(h => h.name.StartsWith(searchText));
+                    var doExist = context.Horse.Where(h => h.name.StartsWith(horse.name) && h.sex.Equals(horse.sex));
                     if (doExist.Count() > 0){
                      foreach(var elem in doExist){
                         foundHorses.Add(HorseMapper.ToHorseSearchDTOMap(elem,owners));

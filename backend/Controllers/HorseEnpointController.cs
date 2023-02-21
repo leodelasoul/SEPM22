@@ -54,8 +54,8 @@ namespace backend.Controllers
         }
 
         [HttpPost("search")]
-        public List<HorseSearchDTO> searchHorse([FromBody] string searchText){
-            return _service.search(searchText);
+        public List<HorseSearchDTO> searchHorse([FromBody] HorseSearchDTO searchHorse){
+            return _service.search(searchHorse);
         }
 
 

@@ -34,6 +34,8 @@ public class Startup{
             app.UseHsts();
         }
         app.UseHttpsRedirection();
+        app.UseAuthentication();
+
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
