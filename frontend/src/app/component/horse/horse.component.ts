@@ -7,7 +7,7 @@ import { Sex } from 'src/app/dto/sex';
 import { Router } from '@angular/router';
 import { ConfirmationDeleteDialogComponent } from '../confirm-delete-dialog/confirmation-delete-dialog';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component';
 
 @Component({
   selector: 'app-horse',
@@ -61,7 +61,7 @@ export class HorseComponent implements OnInit {
         subject: horse
       }
     });
-    dialogRef.afterClosed().subscribe(() => {      
+    dialogRef.afterClosed().subscribe(() => {
       if (dialogRef.componentInstance.isConfirmed) {
         this.service.delete(id, horse)
           .subscribe({
@@ -78,6 +78,21 @@ export class HorseComponent implements OnInit {
           });
       }
     })
+  }
+
+  onDetail(id: number, horse: Horse) {
+    const dialogRef = this.dialog.open(DetailDialogComponent, {
+      data: {
+        confirmAction: 'Detail',
+        subject: horse
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      if (dialogRef.componentInstance.isConfirmed) {
+        this.router.navigate(['/horses/edit/'+id]);
+      }
+
+    });
   }
 
 

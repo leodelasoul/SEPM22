@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'horses', children: [
     {path: '', component: HorseComponent},
     {path: 'create', component: HorseCreateEditComponent, data: {mode: HorseCreateEditMode.create}},
-    {path: 'edit', component: HorseCreateEditComponent, data: {mode: HorseCreateEditMode.edit}},
+    {path: 'edit/:id', component: HorseCreateEditComponent, data: {mode: HorseCreateEditMode.edit}},
 
   ]},
   {path: 'owners', children:[

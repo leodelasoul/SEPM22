@@ -56,11 +56,12 @@ export class HorseService {
 
 
   public searchByParent(name: string,sex: Sex ,limitTo: number): Observable<Horse[]> {
-    const params = new HttpParams()
-      .set('name', name)
-      .set('sex', sex)
-      .set('maxAmount', limitTo);
-    return this.http.post<Horse[]>(baseUri + "/search", { params });
+    const httpOptions = {
+      name : name,
+      sex : sex,
+      maxAmount: limitTo
+    };
+    return this.http.post<Horse[]>(baseUri + "/search", httpOptions );
   }
 
 

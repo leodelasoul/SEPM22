@@ -18,6 +18,7 @@ import {HorseComponent} from './component/horse/horse.component';
 import {OwnerComponent } from './component/owner/owner.component';
 import {OwnerCreateEditComponent } from './component/owner/owner-create-edit/owner-create-edit.component';
 import {ConfirmationDeleteDialogComponent} from './component/confirm-delete-dialog/confirmation-delete-dialog';
+import { DetailDialogComponent } from './component/detail-dialog/detail-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {ConfirmationDeleteDialogComponent} from './component/confirm-delete-dial
     AutocompleteComponent,
     OwnerComponent,
     OwnerCreateEditComponent,
-    ConfirmationDeleteDialogComponent
+    ConfirmationDeleteDialogComponent,
+    DetailDialogComponent
   ],
   imports: [
     BrowserModule,
